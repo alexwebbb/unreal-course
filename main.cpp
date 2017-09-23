@@ -4,17 +4,15 @@
 #include <thread>
 
 
-
-using namespace std;
-using namespace this_thread; // sleep_for, sleep_until
-using namespace chrono; // nanoseconds, system_clock, seconds
+using namespace std::this_thread; // sleep_for, sleep_until
+using namespace std::chrono; // nanoseconds, system_clock, seconds
 
 
-void Say(string phrase, int delay = 1500);
+void Say(std::string phrase, int delay = 1500);
 void PlayGame();
 bool PlayAgainQuery();
 void PrintIntro();
-string GetGuess();
+std::string GetGuess();
 
 int main(int argc, char **argv) 
 {
@@ -26,13 +24,13 @@ int main(int argc, char **argv)
 
 void PlayGame()
 {
-	string Guess = "";
+	std::string Guess = "";
 	bool Continue = true;
 
 	do
 	{
 		Guess = GetGuess();
-		cout << "Your guess is " << Guess << "?? Wild" << endl;
+		std::cout << "Your guess is " << Guess << "?? Wild" << std::endl;
 
 		Continue = PlayAgainQuery();
 	}
@@ -42,8 +40,9 @@ void PlayGame()
 
 bool PlayAgainQuery()
 {
-	string Res = "";
-	string Comebacks[6] = { "What was that?", "Come again?", "Pardon?", "Look... I'm a computer", "ok....", "....." };
+	std::string Res = "";
+	std::string Comebacks[6] = { "What was that?", "Come again?", 
+		"Pardon?", "Look... I'm a computer", "ok....", "....." };
 	int itt = 0;
 
 
@@ -52,8 +51,8 @@ bool PlayAgainQuery()
 	while (true)
 	{
 		itt++;
-		cout << "(Type 'y' or 'n') ";
-		getline(cin, Res);
+		std::cout << "(Type 'y' or 'n') ";
+		std::getline(std::cin, Res);
 		if (Res[0] == 'y' || Res[0] == 'Y')
 		{
 			Say("Sweet", 400);
@@ -71,10 +70,10 @@ bool PlayAgainQuery()
 	}
 }
 
-void Say(string phrase, int delay)
+void Say(std::string phrase, int delay)
 {
 	sleep_for(milliseconds(delay));
-	cout << phrase << endl;
+	std::cout << phrase << std::endl;
 }
 
 void PrintIntro()
@@ -84,22 +83,22 @@ void PrintIntro()
 	Say("Lets play some bulls and COWS yall!", 2000);
 	Say("I got a secret word, yall all gotta try and guess it.");
 	sleep_for(milliseconds(1500));
-	cout << "Heh, I'll make it easy for ya, its " << WORD_LENGTH << " long,\n";
+	std::cout << "Heh, I'll make it easy for ya, its " << WORD_LENGTH << " long,\n";
 	Say("an' I ain' use any letter more than once.");
 
 	return;
 }
 
-string GetGuess()
+std::string GetGuess()
 {
-	string Guess = "";
+	std::string Guess = "";
 
 	for (size_t i = 0; i < 5; i++)
 	{
 		sleep_for(milliseconds(400));
-		cout << ".";
+		std::cout << ".";
 	}
-	cout << "Gimme that guess! \n(Hint: Enter your guess) ";
-	getline(cin, Guess);
+	std::cout << "Gimme that guess! \n(Hint: Enter your guess) ";
+	std::getline(std::cin, Guess);
 	return Guess;
 }
