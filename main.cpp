@@ -27,22 +27,31 @@ int main(int argc, char **argv)
 void PlayGame()
 {
 	string Guess = "";
-	
-	Guess = GetGuess();
-	cout << "Your guess is " << Guess << "?? Wild" << endl;
-	
-	PlayAgainQuery();
+	bool Continue = true;
 
+	do
+	{
+		Guess = GetGuess();
+		cout << "Your guess is " << Guess << "?? Wild" << endl;
+
+		Continue = PlayAgainQuery();
+	}
+	while (Continue == true);
 	
 }
 
 bool PlayAgainQuery()
 {
 	string Res = "";
+	string Comebacks[6] = { "What was that?", "Come again?", "Pardon?", "Look... I'm a computer", "ok....", "....." };
+	int itt = 0;
+
+
 
 	Say("Do you want to play again?");
 	while (true)
 	{
+		itt++;
 		cout << "(Type 'y' or 'n') ";
 		getline(cin, Res);
 		if (Res[0] == 'y' || Res[0] == 'Y')
@@ -57,7 +66,7 @@ bool PlayAgainQuery()
 		}
 		else
 		{
-			Say("What was that?", 200);
+			Say(Comebacks[itt%6], 200);
 		}
 	}
 }
