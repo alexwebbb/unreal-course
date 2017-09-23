@@ -4,28 +4,65 @@
 #include <thread>
 
 
+
 using namespace std;
 using namespace this_thread; // sleep_for, sleep_until
 using namespace chrono; // nanoseconds, system_clock, seconds
 
 
-void Say(string phrase, int delay);
+void Say(string phrase, int delay = 1500);
+void PlayGame();
+bool PlayAgainQuery();
 void PrintIntro();
 string GetGuess();
 
 int main(int argc, char **argv) 
 {
-	string Guess = "";
-	
 	PrintIntro();
-	Guess = GetGuess();
-	cout << "Your guess is " << Guess << "?? Wild" << endl;
-
+	PlayGame();
+	
 	return 0;
-
 }
 
-void Say(string phrase, int delay = 1500)
+void PlayGame()
+{
+	string Guess = "";
+	
+	Guess = GetGuess();
+	cout << "Your guess is " << Guess << "?? Wild" << endl;
+	
+	PlayAgainQuery();
+
+	
+}
+
+bool PlayAgainQuery()
+{
+	string Res = "";
+
+	Say("Do you want to play again?");
+	while (true)
+	{
+		cout << "(Type 'y' or 'n') ";
+		getline(cin, Res);
+		if (Res[0] == 'y' || Res[0] == 'Y')
+		{
+			Say("Sweet", 400);
+			return true;
+		}
+		else if (Res[0] == 'n' || Res[0] == 'N')
+		{
+			Say("No way!", 100);
+			return false;
+		}
+		else
+		{
+			Say("What was that?", 200);
+		}
+	}
+}
+
+void Say(string phrase, int delay)
 {
 	sleep_for(milliseconds(delay));
 	cout << phrase << endl;
