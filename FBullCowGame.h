@@ -12,6 +12,6 @@ public:
 
 
 private:
-	int MyCurrentTry();
-	int MyMaxTries(); // what does this mean???
+	int MyCurrentTry = 0;
+	int MyMaxTries = 5; 
 };

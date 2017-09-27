@@ -1,3 +1,4 @@
 ﻿  main.cpp
+c:\users\alexw\source\repos\unreal projects\unrealcourse\section_02\bullcowgame\main.cpp(39): warning C4018: '<': signed/unsigned mismatch
   BullCowGame.vcxproj -> C:\Users\alexw\Source\Repos\Unreal Projects\UnrealCourse\Section_02\Debug\BullCowGame.exe
   BullCowGame.vcxproj -> C:\Users\alexw\Source\Repos\Unreal Projects\UnrealCourse\Section_02\Debug\BullCowGame.pdb (Partial PDB)

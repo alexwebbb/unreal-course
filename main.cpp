@@ -2,6 +2,7 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include "FBullCowGame.h"
 
 
 using namespace std::this_thread; // sleep_for, sleep_until
@@ -14,9 +15,12 @@ bool PlayAgainQuery();
 void PrintIntro();
 std::string GetGuess();
 
+FBullCowGame BCGame;
+
 int main(int argc, char **argv) 
 {
-	PrintIntro();
+
+	// PrintIntro();
 	PlayGame();
 	
 	return 0;
@@ -24,18 +28,24 @@ int main(int argc, char **argv)
 
 void PlayGame()
 {
+	
+	int MaxTries = BCGame.GetMaxTries();
+
 	std::string Guess = "";
 	bool Continue = true;
 
 	do
 	{
-		Guess = GetGuess();
-		std::cout << "Your guess is " << Guess << "?? Wild" << std::endl;
+		for (size_t i = 0; i < MaxTries; i++)
+		{
+
+			Guess = GetGuess();
+			std::cout << "Your guess is " << Guess << "?? Wild" << std::endl;
+		}
 
 		Continue = PlayAgainQuery();
 	}
 	while (Continue == true);
-	
 }
 
 bool PlayAgainQuery()
@@ -92,7 +102,12 @@ void PrintIntro()
 std::string GetGuess()
 {
 	std::string Guess = "";
+	int CurrentTry = BCGame.GetCurrentTry();
 
+	if (CurrentTry)
+	{
+		std::cout << "\nTry " << CurrentTry + 1 << std::endl;
+	}
 	for (size_t i = 0; i < 5; i++)
 	{
 		sleep_for(milliseconds(400));
