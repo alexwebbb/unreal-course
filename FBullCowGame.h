@@ -1,6 +1,10 @@
 #pragma once
 #include<string>
 
+using FString = std::string;
+using int32 = int;
+
+
 class FBullCowGame
 {
 public:
@@ -10,8 +14,8 @@ public:
 	int GetCurrentTry() const;
 	bool IsGameWon() const;
 
-	void Reset(int WordLength, int MaxTries);
-	bool CheckGuessValidity(std::string);
+	void Reset(int32 WordLength, int32 MaxTries);
+	bool CheckGuessValidity(FString);
 
 
 private:

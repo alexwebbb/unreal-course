@@ -1,15 +1,17 @@
 #include "FBullCowGame.h"
 
+using FString = std::string;
+using int32 = int;
 
 FBullCowGame::FBullCowGame()
 {
 	this->Reset(6, 8);
 }
 
-int FBullCowGame::GetMaxTries() const { return MyMaxTries; }
-int FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
+int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
+int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 
-void FBullCowGame::Reset(int WordLength, int MaxTries)
+void FBullCowGame::Reset(int32 WordLength, int32 MaxTries)
 {
 
 	MyMaxTries = MaxTries;
@@ -24,7 +26,7 @@ bool FBullCowGame::IsGameWon() const
 	return false;
 }
 
-bool FBullCowGame::CheckGuessValidity(std::string)
+bool FBullCowGame::CheckGuessValidity(FString)
 {
 	return false;
 }

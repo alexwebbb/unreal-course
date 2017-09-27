@@ -5,21 +5,24 @@
 #include "FBullCowGame.h"
 
 
-using namespace std::this_thread; // sleep_for, sleep_until
-using namespace std::chrono; // nanoseconds, system_clock, seconds
+// using namespace std::this_thread; // sleep_for, sleep_until
+// using namespace std::chrono; // nanoseconds, system_clock, seconds
 
 
-void Say(std::string phrase, int delay = 1500);
+using FText = std::string;
+using int32 = int;
+
+void Say(FText phrase, int32 delay = 1500);
 void PlayGame();
 bool PlayAgainQuery();
 void PrintIntro();
-std::string GetGuess();
+FText GetGuess();
 
 FBullCowGame BCGame;
-constexpr int WORD_LENGTH = 6;
-constexpr int MAX_TRIES = 8;
+constexpr int32 WORD_LENGTH = 6;
+constexpr int32 MAX_TRIES = 8;
 
-int main(int argc, char **argv) 
+int main(int32 argc, char **argv) 
 {
 
 	PrintIntro();
@@ -32,14 +35,14 @@ void PlayGame()
 {
 	BCGame.Reset(WORD_LENGTH, MAX_TRIES);
 
-	int MaxTries = BCGame.GetMaxTries();
-	std::string Guess = "";
+	int32 MaxTries = BCGame.GetMaxTries();
+	FText Guess = "";
 	bool Continue = true;
 	
 	do
 	{
 		// TODO  will convert to a while loop later
-		for (int i = 0; i < MaxTries; i++)
+		for (int32 i = 0; i < MaxTries; i++)
 		{
 
 			Guess = GetGuess();
@@ -54,10 +57,10 @@ void PlayGame()
 
 bool PlayAgainQuery()
 {
-	std::string Res = "";
-	std::string Comebacks[6] = { "What was that?", "Come again?", 
+	FText Res = "";
+	FText Comebacks[6] = { "What was that?", "Come again?", 
 		"Pardon?", "Look... I'm a computer", "ok....", "....." };
-	int itt = 0;
+	int32 itt = 0;
 
 
 
@@ -84,9 +87,9 @@ bool PlayAgainQuery()
 	}
 }
 
-void Say(std::string phrase, int delay)
+void Say(FText phrase, int32 delay)
 {
-	sleep_for(milliseconds(delay));
+	std::this_thread::sleep_for(std::chrono::milliseconds(delay));
 	std::cout << phrase << std::endl;
 }
 
@@ -100,10 +103,10 @@ void PrintIntro()
 	return;
 }
 
-std::string GetGuess()
+FText GetGuess()
 {
-	std::string Guess = "";
-	int CurrentTry = BCGame.GetCurrentTry();
+	FText Guess = "";
+	int32 CurrentTry = BCGame.GetCurrentTry();
 
 	if (CurrentTry > 1)
 	{
@@ -111,7 +114,7 @@ std::string GetGuess()
 	}
 	for (size_t i = 0; i < 5; i++)
 	{
-		sleep_for(milliseconds(400));
+		std::this_thread::sleep_for(std::chrono::milliseconds(400));
 		std::cout << ".";
 	}
 	std::cout << "Gimme that guess! \n(Hint: Enter your guess) ";
