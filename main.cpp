@@ -16,11 +16,13 @@ void PrintIntro();
 std::string GetGuess();
 
 FBullCowGame BCGame;
+constexpr int WORD_LENGTH = 6;
+constexpr int MAX_TRIES = 8;
 
 int main(int argc, char **argv) 
 {
 
-	// PrintIntro();
+	PrintIntro();
 	PlayGame();
 	
 	return 0;
@@ -28,21 +30,23 @@ int main(int argc, char **argv)
 
 void PlayGame()
 {
-	
-	int MaxTries = BCGame.GetMaxTries();
+	BCGame.Reset(WORD_LENGTH, MAX_TRIES);
 
+	int MaxTries = BCGame.GetMaxTries();
 	std::string Guess = "";
 	bool Continue = true;
-
+	
 	do
 	{
-		for (size_t i = 0; i < MaxTries; i++)
+		// TODO  will convert to a while loop later
+		for (int i = 0; i < MaxTries; i++)
 		{
 
 			Guess = GetGuess();
 			std::cout << "Your guess is " << Guess << "?? Wild" << std::endl;
+			// TODO check validity of guess
 		}
-
+		// TODO Give results of game
 		Continue = PlayAgainQuery();
 	}
 	while (Continue == true);
@@ -88,8 +92,6 @@ void Say(std::string phrase, int delay)
 
 void PrintIntro()
 {
-	constexpr int WORD_LENGTH = 9;
-
 	Say("Lets play some bulls and COWS yall!", 2000);
 	Say("I got a secret word, yall all gotta try and guess it.");
 	sleep_for(milliseconds(1500));
@@ -104,9 +106,9 @@ std::string GetGuess()
 	std::string Guess = "";
 	int CurrentTry = BCGame.GetCurrentTry();
 
-	if (CurrentTry)
+	if (CurrentTry > 1)
 	{
-		std::cout << "\nTry " << CurrentTry + 1 << std::endl;
+		std::cout << "\nTry " << CurrentTry << std::endl;
 	}
 	for (size_t i = 0; i < 5; i++)
 	{
