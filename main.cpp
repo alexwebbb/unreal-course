@@ -94,8 +94,7 @@ void PrintIntro()
 {
 	Say("Lets play some bulls and COWS yall!", 2000);
 	Say("I got a secret word, yall all gotta try and guess it.");
-	sleep_for(milliseconds(1500));
-	std::cout << "Heh, I'll make it easy for ya, its " << WORD_LENGTH << " long,\n";
+	Say("Heh, I'll make it easy for ya, its " + std::to_string(WORD_LENGTH) + " long,");
 	Say("an' I ain' use any letter more than once.");
 
 	return;
