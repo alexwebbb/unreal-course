@@ -18,8 +18,9 @@ void FBullCowGame::Reset()
 	constexpr int32 MAX_TRIES = 4;
 	const FString HIDDEN_WORD = "potato";
 
-	MyMaxTries = MAX_TRIES;
 	MyWordLength = WORD_LENGTH;
+	MyMaxTries = MAX_TRIES;
+	MyHiddenWord = HIDDEN_WORD;
 	MyCurrentTry = 1;
 
 	return;
@@ -37,19 +38,59 @@ bool FBullCowGame::CheckGuessValidity(FString)
 
 
 // handles valid guess, increment turn # and return count
-BullCowCount FBullCowGame::SubmitGuess(FString)
+FBullCowCount FBullCowGame::SubmitGuess(FString ValidGuess)
 {
+
+	
+
 	// increment turn number
 	MyCurrentTry++;
 
 	// initialize return variable
-	BullCowCount BullCowCount;
-	
+	FBullCowCount BullCowCount;
+	int32 HiddenWordLength = MyHiddenWord.length();
+	int32 GuessLength = ValidGuess.length();
+
+
 	// loop through letter of guess
-	
+	for (int32 i = 0; i < HiddenWordLength; i++)
+	{
 
+		bool IsBull = false;
+		bool IsCow = false;
 
-	// and compare each letter to word
+		// compare each letter to word
+		for (int32 j = 0; j < HiddenWordLength; j++)
+		{
+			// if there is a match then
+			// extra conditions til they fix it in the course
+			if (i < HiddenWordLength &&
+				j < GuessLength &&
+				MyHiddenWord[i] == ValidGuess[j])
+			{
+				// if index matches as well then Bull
+				if (i == j)
+				{
+					IsBull = true;
+					
+				}
+				// if not then Cow
+				else
+				{
+					IsCow = true;
+				}
+			}
+		}
+
+		if (IsBull)
+		{
+			BullCowCount.Bulls++;
+		}
+		else if (IsCow)
+		{
+			BullCowCount.Cows++;
+		} 
+	}
 
 
 	return BullCowCount;

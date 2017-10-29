@@ -23,7 +23,7 @@ FBullCowGame BCGame;
 int main(int32 argc, char **argv) 
 {
 
-	PrintIntro();
+	// PrintIntro();
 	PlayGame();
 	
 	return 0;
@@ -31,7 +31,7 @@ int main(int32 argc, char **argv)
 
 void PlayGame()
 {
-	BCGame.Reset(WORD_LENGTH, MAX_TRIES);
+	BCGame.Reset();
 
 	int32 MaxTries = BCGame.GetMaxTries();
 	FText Guess = "";
@@ -42,10 +42,18 @@ void PlayGame()
 		// TODO  will convert to a while loop later
 		for (int32 i = 0; i < MaxTries; i++)
 		{
-
-			Guess = GetGuess();
-			std::cout << "Your guess is " << Guess << "?? Wild" << std::endl;
+			Guess = GetGuess(); 
+			
 			// TODO check validity of guess
+
+			// submit valid guess to the game, and receive counts
+			FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
+
+			// print number of bulls and cows
+			Say("Bulls: " + std::to_string(BullCowCount.Bulls), 100);
+			Say("Cows: " + std::to_string(BullCowCount.Cows), 100);
+			Say("Your guess is " + Guess + "?? Wild");
+			std::cout << std::endl;
 		}
 		// TODO Give results of game
 		Continue = PlayAgainQuery();
@@ -95,7 +103,8 @@ void PrintIntro()
 {
 	Say("Lets play some bulls and COWS yall!", 2000);
 	Say("I got a secret word, yall all gotta try and guess it.");
-	Say("Heh, I'll make it easy for ya, its " + std::to_string(WORD_LENGTH) + " long,");
+	// fix this magic number
+	Say("Heh, I'll make it easy for ya, its " + std::to_string(6) + " long,");
 	Say("an' I ain' use any letter more than once.");
 
 	return;
