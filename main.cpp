@@ -19,8 +19,6 @@ void PrintIntro();
 FText GetGuess();
 
 FBullCowGame BCGame;
-constexpr int32 WORD_LENGTH = 6;
-constexpr int32 MAX_TRIES = 8;
 
 int main(int32 argc, char **argv) 
 {
